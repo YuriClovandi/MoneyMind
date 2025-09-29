@@ -1,0 +1,55 @@
+.reports-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* O gráfico ocupa mais espaço */
+  gap: 30px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .reports-grid {
+    grid-template-columns: 1fr; /* Coluna única em telas menores */
+  }
+}
+
+.chart-placeholder {
+  width: 100%;
+  height: 300px;
+  background-color: #f7f7f7;
+  border: 1px dashed #ddd;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #aaa;
+}
+
+.summary-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.summary-table td {
+  padding: 18px 5px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.summary-table tr:last-child td {
+  border-bottom: none;
+}
+
+.summary-table .value {
+  text-align: right;
+  font-weight: bold;
+}
+
+.summary-table .gain {
+  color: var(--primary-green);
+}
+
+.summary-table .expense {
+  color: var(--danger-red);
+}
+
+.summary-table .final-balance {
+  color: var(--dark-gray);
+}

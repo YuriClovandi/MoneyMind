@@ -1,0 +1,10 @@
+.card {
+  background-color: var(--white);
+  /* O design original usa cantos retos para um visual moderno */
+  border-radius: 0; 
+  padding: 24px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Sombra mais sutil */
+  width: 100%;
+  display: flex; /* Facilita o alinhamento interno */
+  flex-direction: column;
+}

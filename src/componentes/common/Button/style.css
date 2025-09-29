@@ -1,0 +1,19 @@
+.common-button {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--dark-gray);
+  color: var(--white);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.common-button:hover {
+  background-color: #3a506b;
+}
+
+.common-button.full-width {
+  width: 100%;
+}

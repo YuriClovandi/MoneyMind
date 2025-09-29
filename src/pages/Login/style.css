@@ -1,0 +1,27 @@
+/* Estiliza o título do formulário */
+.form-title {
+  font-size: 1.8rem;
+  color: var(--dark-gray);
+  margin-bottom: 25px; /* Aumenta o espaço abaixo do título */
+}
+
+/* Cria um container para os links e os organiza */
+.form-links {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column; /* Coloca um link embaixo do outro */
+  gap: 10px; /* Adiciona um espaço entre os links */
+}
+
+/* Estiliza os links individualmente */
+.form-links a {
+  color: var(--primary-green);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.form-links a:hover {
+  text-decoration: underline;
+  color: #27ae60; /* Um verde um pouco mais escuro */
+}

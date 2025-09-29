@@ -1,0 +1,18 @@
+.form-info {
+  font-size: 0.95rem;
+  color: #666;
+  margin-bottom: 25px;
+  line-height: 1.5;
+}
+
+.form-success-message {
+  font-size: 1rem;
+  color: var(--primary-green);
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid var(--primary-green);
+  border-radius: 5px;
+  background-color: #f0fff4;
+}
