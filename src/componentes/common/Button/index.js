@@ -1,15 +1,11 @@
+// src/componentes/common/Button/index.js
 import React from 'react';
 import './style.css';
 
-const Button = ({ children, type = 'submit', onClick, fullWidth = false }) => {
-  const widthClass = fullWidth ? 'full-width' : '';
-
+const Button = ({ children, type, onClick, variant = 'primary' }) => {
+  const className = `button button--${variant}`;
   return (
-    <button
-      type={type}
-      onClick={onClick}
-      className={`common-button ${widthClass}`}
-    >
+    <button type={type} onClick={onClick} className={className}>
       {children}
     </button>
   );

@@ -1,10 +1,9 @@
+/* src/componentes/common/Card/style.css */
 .card {
-  background-color: var(--white);
-  /* O design original usa cantos retos para um visual moderno */
-  border-radius: 0; 
-  padding: 24px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Sombra mais sutil */
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   width: 100%;
-  display: flex; /* Facilita o alinhamento interno */
-  flex-direction: column;
+  max-width: 550px; /* Aumentado de 420px para 550px */
 }

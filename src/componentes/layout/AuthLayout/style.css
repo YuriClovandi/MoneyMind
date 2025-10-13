@@ -1,35 +1,31 @@
-.auth-layout-container {
+/* src/componentes/layout/AuthLayout/style.css */
+.split-screen-layout {
+  display: flex;
+  min-height: 100vh;
+  /* A MUDANÇA PRINCIPAL: A tela inteira agora tem o fundo verde */
+  background-color: var(--primary-green); 
+}
+
+.split-screen-layout__left {
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  background-color: var(--primary-green);
-  padding: 20px;
-}
-
-.auth-form-card {
-  background-color: var(--white);
   padding: 40px;
-  border-radius: 8px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.large-logo {
+  max-width: 500px; 
   width: 100%;
-  max-width: 400px;
-  text-align: center;
+  height: auto;
+
 }
 
-.auth-logo-text {
-  font-size: 2.5rem;
-  color: var(--primary-green);
-  margin-bottom: 30px;
-}
-
-.auth-form-card a {
-    color: var(--primary-green);
-    text-decoration: none;
-    margin-top: 15px;
-    display: inline-block;
-}
-
-.auth-form-card h2 {
-    margin-bottom: 25px;
+.split-screen-layout__right {
+  width: 50%;
+  /* O fundo cinza foi REMOVIDO daqui */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 70px;
 }
