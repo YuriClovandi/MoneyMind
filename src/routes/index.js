@@ -1,31 +1,28 @@
+// src/routes/index.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Login from '../pages/Login';
+import SignUp from '../pages/SignUp';
+import Dashboard from '../pages/Dashboard';
+import EsqueceuSenha from '../pages/EsqueceuSenha';
+import AddExpense from '../pages/AddExpense';
+import Reports from '../pages/Reports';
+import ExportReports from '../pages/ExportReports'; // Importa o novo componente
 
-// Importe suas páginas aqui
-import LoginPage from '../pages/Login';
-import SignUpPage from '../pages/SignUp';
-import DashboardPage from '../pages/Dashboard';
-import AddExpensePage from '../pages/AddExpense';
-import ReportsPage from '../pages/Reports';
-import ForgotPasswordPage from '../pages/EsqueceuSenha'; // <-- 1. IMPORTE A NOVA PÁGINA
+const AppRoutes = () => {
+    return (
+        <Router>
+            <Routes>
+                <Route path="/" element={<Login />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/esqueceu-senha" element={<EsqueceuSenha />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/reports" element={<Reports />} />
+                <Route path="/add-expense" element={<AddExpense />} /> {/* Rota para Adicionar Despesa */}
+                <Route path="/export-reports" element={<ExportReports />} /> {/* Rota para Exportar Relatórios */}
+            </Routes>
+        </Router>
+    );
+};
 
-export default function AppRoutes() {
-  return (
-    <Router>
-      <Routes>
-        {/* Rotas de Autenticação */}
-        <Route path="/" element={<LoginPage />} />
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/forgot-password" element={<ForgotPasswordPage />} /> {/* <-- 2. ADICIONE A NOVA ROTA */}
-
-        {/* Rotas Protegidas (dentro da aplicação) */}
-        <Route path="/dashboard" element={<DashboardPage />} />
-        <Route path="/add-expense" element={<AddExpensePage />} />
-        <Route path="/reports" element={<ReportsPage />} />
-
-        {/* Rota para qualquer outro caminho não encontrado */}
-        <Route path="*" element={<LoginPage />} />
-      </Routes>
-    </Router>
-  );
-}
+export default AppRoutes;
