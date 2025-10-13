@@ -1,0 +1,27 @@
+/* src/pages/SignUp/style.css */
+.signup-form-container {
+  text-align: center;
+}
+
+.signup-title {
+  color: var(--text-dark);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.signup-subtitle {
+  color: var(--text-gray);
+  font-size: 16px;
+  margin-bottom: 32px;
+}
+
+.login-link {
+  margin-top: 24px;
+  font-size: 15px;
+  color: var(--text-gray);
+}
+
+.login-link a {
+    font-weight: 600;
+}

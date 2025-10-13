@@ -1,51 +1,61 @@
+// src/pages/Login/index.js
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthLayout from '../../componentes/layout/AuthLayout';
+import Card from '../../componentes/common/Card';
 import Input from '../../componentes/common/Input';
 import Button from '../../componentes/common/Button';
-import './style.css'; // Importa nosso arquivo de estilo
+import './style.css';
 
-const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    console.log('Login com:', { email, password });
-    navigate('/dashboard');
-  };
+    const handleLogin = (e) => {
+        e.preventDefault();
+        navigate('/dashboard');
+    };
 
-  return (
-    <AuthLayout>
-      {/* Adicionamos uma className para o título */}
-      <h2 className="form-title">Bem-vindo de volta!</h2>
+    const handleSignUp = () => {
+        navigate('/signup');
+    };
 
-      <form onSubmit={handleLogin}>
-        <Input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <Input
-          type="password"
-          placeholder="Senha"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <Button type="submit" fullWidth>Entrar</Button>
-      </form>
+    return (
+        <AuthLayout>
+            <Card>
+                <div className="login-form-container">
+                    <h2 className="welcome-title">Bem vindo!</h2>
 
-      {/* Adicionamos uma div para agrupar os links */}
-      <div className="form-links">
-        <Link to="/forgot-password">Esqueci minha senha</Link>
-        <Link to="/signup">Não tem uma conta? Crie uma agora</Link>
-      </div>
-    </AuthLayout>
-  );
+                    <form onSubmit={handleLogin}>
+                        <Input
+                            type="email"
+                            placeholder="E-mail"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <Input
+                            type="password"
+                            placeholder="Senha"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                        
+                        <div className="forgot-password-link">
+                            <Link to="/esqueceu-senha">Esqueceu a senha?</Link>
+                        </div>
+
+                        <Button type="submit" variant="primary">
+                            Entrar
+                        </Button>
+                        <Button type="button" variant="secondary" onClick={handleSignUp}>
+                            Criar conta
+                        </Button>
+                    </form>
+                </div>
+            </Card>
+        </AuthLayout>
+    );
 };
 
-export default LoginPage;
+export default Login;
