@@ -1,51 +1,51 @@
+// src/pages/EsqueceuSenha/index.js
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AuthLayout from '../../componentes/layout/AuthLayout';
+import Card from '../../componentes/common/Card';
 import Input from '../../componentes/common/Input';
 import Button from '../../componentes/common/Button';
 import './style.css';
 
-const ForgotPasswordPage = () => {
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+const EsqueceuSenha = () => {
+    const [email, setEmail] = useState('');
+    const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Lógica da API para enviar o email de recuperação iria aqui
-    console.log('Solicitação de recuperação para o email:', email);
+    const handlePasswordReset = (e) => {
+        e.preventDefault();
+        // Lógica para enviar o e-mail de recuperação aqui
+        console.log('Solicitação de recuperação para o e-mail:', email);
+        alert('Se o e-mail estiver cadastrado, você receberá um link para redefinir sua senha.');
+        navigate('/'); // Volta para a tela de login
+    };
 
-    // Simula o envio com uma mensagem para o usuário
-    setMessage(`Se um usuário com o e-mail ${email} existir, um link de recuperação foi enviado.`);
-    setEmail(''); // Limpa o campo
-  };
+    return (
+        <AuthLayout>
+            <Card>
+                <div className="forgot-password-container">
+                    <h2 className="forgot-password-title">Recuperar Senha</h2>
 
-  return (
-    <AuthLayout>
-      <h2 className="form-title">Esqueceu a senha?</h2>
-      <p className="form-info">
-        Sem problemas! Digite seu e-mail abaixo e enviaremos um link para você redefinir sua senha.
-      </p>
 
-      {!message ? (
-        <form onSubmit={handleSubmit}>
-          <Input
-            type="email"
-            placeholder="Digite seu e-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <Button type="submit" fullWidth>Enviar link de recuperação</Button>
-        </form>
-      ) : (
-        <p className="form-success-message">{message}</p>
-      )}
+                    <form onSubmit={handlePasswordReset}>
+                        <Input
+                            type="email"
+                            placeholder="Seu e-mail cadastrado"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                        
+                        <Button type="submit" variant="primary">
+                            Enviar
+                        </Button>
+                    </form>
 
-      <div className="form-links">
-        <Link to="/">Voltar para o Login</Link>
-      </div>
-    </AuthLayout>
-  );
+                    <div className="back-to-login-link">
+                        <Link to="/">Voltar para o Login</Link>
+                    </div>
+                </div>
+            </Card>
+        </AuthLayout>
+    );
 };
 
-export default ForgotPasswordPage;
+export default EsqueceuSenha;

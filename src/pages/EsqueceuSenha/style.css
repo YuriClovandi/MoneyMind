@@ -1,18 +1,26 @@
-.form-info {
-  font-size: 0.95rem;
-  color: #666;
-  margin-bottom: 25px;
-  line-height: 1.5;
+/* src/pages/EsqueceuSenha/style.css */
+.forgot-password-container {
+  text-align: center;
 }
 
-.form-success-message {
-  font-size: 1rem;
-  color: var(--primary-green);
-  font-weight: bold;
-  margin-top: 20px;
-  margin-bottom: 20px;
-  padding: 15px;
-  border: 1px solid var(--primary-green);
-  border-radius: 5px;
-  background-color: #f0fff4;
+.forgot-password-title {
+  color: var(--text-dark);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.forgot-password-subtitle {
+  color: var(--text-gray);
+  font-size: 16px;
+  margin-bottom: 32px;
+}
+
+.back-to-login-link {
+  margin-top: 24px;
+  font-size: 15px;
+}
+
+.back-to-login-link a {
+    font-weight: 600;
 }

@@ -1,47 +1,103 @@
-.expense-form {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  max-width: 600px; /* Limita a largura do formulário */
-  margin: 0 auto; /* Centraliza o formulário no card */
+/* src/pages/AddExpense/style.css */
+.back-button {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    background: black;
+    color: white;
+    border: none;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
+.add-expense-container {
+    display: flex;
+    height: 100vh;
+    padding: 40px;
+    box-sizing: border-box;
+    gap: 60px;
 }
 
-.form-group label {
-  margin-bottom: 8px;
-  font-weight: bold;
-  color: var(--dark-gray);
-  font-size: 0.9rem;
+.left-column {
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.form-group input,
-.form-group select {
-  padding: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-  transition: border-color 0.2s, box-shadow 0.2s;
+.page-title {
+    font-size: 94px;
+    font-weight: 700;
+    color: white;
+    text-align: center;
 }
 
-.form-group input:focus,
-.form-group select:focus {
-  outline: none;
-  border-color: var(--primary-green);
-  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+.page-title span {
+    display: block;
 }
 
-/* Atualiza o estilo do botão para usar o componente common/Button */
-.expense-form .common-button {
-  background-color: var(--primary-green);
-  padding: 15px;
-  font-size: 1.1rem;
-  margin-top: 10px;
+.right-column-cards {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end; /* Adicione esta linha para alinhar à direita */
 }
 
-.expense-form .common-button:hover {
-  background-color: #27ae60;
+/* Nova classe para o formulário */
+.expense-form-stack {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 700px; /* Aumentado de 550px para 600px */
+    gap: 30px; 
+}
+
+/* Estilo para os cards que agora são campos de formulário */
+.right-column-cards .card {
+    padding: 35px 25px;
+    width: 100%;
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
+}
+
+.right-column-cards .card label {
+    font-size: 14px;
+    color: var(--text-gray);
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.transparent-input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    width: 100%;
+    padding: 5px 0;
+}
+
+.transparent-input::placeholder {
+    color: #aaa;
+}
+
+/* Ajuste específico para o seletor de data ficar alinhado */
+.date-input {
+    color-scheme: light;
+}
+
+.submit-button-container {
+    margin-top: 10px;
+    width: 100%;
+    max-width: 550px;
 }

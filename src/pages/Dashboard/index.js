@@ -1,72 +1,96 @@
-import React, { useState } from 'react';
+// src/pages/Dashboard/index.js
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import MainLayout from '../../componentes/layout/MainLayout';
 import Card from '../../componentes/common/Card';
+import Button from '../../componentes/common/Button';
 import './style.css';
 
-const DashboardPage = () => {
-  const navigate = useNavigate();
-  const [saldo] = useState(2500.00);
-  const [ultimasDespesas] = useState([
-    { id: 1, data: 'Hoje', descricao: 'Supermercado', valor: 100.50 },
-    { id: 2, data: '14/Fevereiro', descricao: 'Restaurante', valor: 80.50 },
-    { id: 3, data: '20/Janeiro', descricao: 'Farmácia', valor: 60.50 },
-  ]);
-  const [categorias] = useState([
-    { id: 1, nome: 'Supermercado', valor: 120.50 },
-    { id: 2, nome: 'Restaurantes', valor: 150.50 },
-  ]);
+// Dados de exemplo
+const MOCK_CATEGORIES = [
+    { name: 'Alimentação', value: 'R$ 550,00' },
+    { name: 'Transporte', value: 'R$ 150,00' },
+    { name: 'Lazer', value: 'R$ 200,00' },
+    { name: 'Moradia', value: 'R$ 1.200,00' },
+];
 
-  return (
-    <MainLayout>
-      <div className="page-title">
-        <h2>Dashboard</h2>
-      </div>
-      <div className="dashboard-grid">
-        <Card className="saldo-card">
-          <h3 className="card-title">Saldo Atual</h3>
-          <p className="saldo-valor">R$ {saldo.toFixed(2).replace('.', ',')}</p>
-        </Card>
-        
-        <Card>
-          <div className="card-header">
-            <h3 className="card-title">Categorias</h3>
-            <select className="period-select" defaultValue="mes">
-              <option value="mes">Mês</option>
-              <option value="ano">Ano</option>
-            </select>
-          </div>
-          <ul className="dashboard-list">
-            {categorias.map(cat => (
-              <li key={cat.id}>
-                <span>{cat.nome}</span>
-                <strong>R$ {cat.valor.toFixed(2).replace('.', ',')}</strong>
-              </li>
-            ))}
-          </ul>
-        </Card>
+const MOCK_EXPENSES = [
+    { date: '12/10', category: 'Almoço', value: 'R$ 45,00' },
+    { date: '11/10', category: 'Uber', value: 'R$ 25,00' },
+    { date: '10/10', category: 'Cinema', value: 'R$ 60,00' },
+    { date: '09/10', category: 'Supermercado', value: 'R$ 230,00' },
+];
 
-        <Card>
-          <div className="card-header">
-            <h3 className="card-title">Últimas Despesas</h3>
-            <button 
-              className="add-button" 
-              onClick={() => navigate('/add-expense')}
-              title="Adicionar nova despesa"
-            >+</button>
-          </div>
-          <ul className="dashboard-list">
-            {ultimasDespesas.map(d => (
-              <li key={d.id}>
-                <span>{d.data} - {d.descricao}</span>
-                <strong>R$ {d.valor.toFixed(2).replace('.', ',')}</strong>
-              </li>
-            ))}
-          </ul>
-        </Card>
-      </div>
-    </MainLayout>
-  );
+const Dashboard = () => {
+    const navigate = useNavigate();
+
+    return (
+        <MainLayout>
+            <button onClick={() => navigate(-1)} className="back-button">
+                &#x2190;
+            </button>
+
+            <div className="dashboard-container">
+                {/* Metade Esquerda */}
+                <div className="dashboard-left">
+                    <h1 className="dashboard-title">Dashboard</h1>
+                </div>
+
+                {/* Metade Direita */}
+                <div className="dashboard-right">
+                    <Card>
+                        <div className="balance-card">
+                            <h3 className="card-title">Saldo Atual</h3>
+                            <p className="balance-value">R$ 2.540,75</p>
+                        </div>
+                    </Card>
+
+                    <Card>
+                        <div className="card-header">
+                            <h3 className="card-title">Categorias</h3>
+                            <select className="filter-select">
+                                <option>Mês</option>
+                                <option>Dia</option>
+                                <option>Ano</option>
+                            </select>
+                        </div>
+                        <ul className="list">
+                            {MOCK_CATEGORIES.map((cat, index) => (
+                                <li key={index} className="list-item">
+                                    <span>{cat.name}</span>
+                                    <span>{cat.value}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </Card>
+
+                    <Card>
+                        <div className="card-header">
+                            <h3 className="card-title">Últimas Despesas</h3>
+                            <button onClick={() => navigate('/add-expense')} className="add-button">
+                                +
+                            </button>
+                        </div>
+                        <ul className="list">
+                            {MOCK_EXPENSES.map((exp, index) => (
+                                <li key={index} className="list-item">
+                                    <span>{exp.date} - {exp.category}</span>
+                                    <span className="expense-value">{exp.value}</span>
+                                </li>
+                            ))}
+                        </ul>
+                    </Card>
+
+                    {/* BOTÃO MOVIDO PARA CÁ */}
+                    <div className="reports-button-container">
+                        <Button variant="primary" onClick={() => navigate('/reports')}>
+                            Relatórios
+                        </Button>
+                    </div>
+                </div>
+            </div>
+        </MainLayout>
+    );
 };
 
-export default DashboardPage;
+export default Dashboard;

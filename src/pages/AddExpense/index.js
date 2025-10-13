@@ -1,86 +1,101 @@
+// src/pages/AddExpense/index.js
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MainLayout from '../../componentes/layout/MainLayout';
 import Card from '../../componentes/common/Card';
 import Button from '../../componentes/common/Button';
 import './style.css';
 
-const AddExpensePage = () => {
-    const [valor, setValor] = useState('');
-    const [descricao, setDescricao] = useState('');
-    const [data, setData] = useState('');
-    const [categoria, setCategoria] = useState('');
+const AddExpense = () => {
+    const navigate = useNavigate();
+    const [value, setValue] = useState('');
+    const [description, setDescription] = useState('');
+    const [date, setDate] = useState('');
+    const [category, setCategory] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Nova despesa:", { valor, descricao, data, categoria });
-        alert("Despesa adicionada com sucesso!");
-        // Limpar formulário
-        setValor('');
-        setDescricao('');
-        setData('');
-        setCategoria('');
-    }
+        const newExpense = { value, description, date, category };
+        console.log('Nova Despesa:', newExpense);
+        navigate('/dashboard');
+    };
 
     return (
         <MainLayout>
-            <div className="page-title">
-                <h2>Adicionar Despesa</h2>
+            <button onClick={() => navigate(-1)} className="back-button">
+                &#x2190;
+            </button>
+            <div className="add-expense-container">
+                {/* Metade Esquerda */}
+                <div className="left-column">
+                    <h1 className="page-title">
+                        Adicionar
+                        <span>Despesas</span>
+                    </h1>
+                </div>
+
+                {/* Metade Direita com Cards separados */}
+                <div className="right-column-cards">
+                    <form onSubmit={handleSubmit} className="expense-form-stack">
+                        <Card>
+                            <label>Valor</label>
+                            <input
+                                type="number"
+                                placeholder="R$ 0,00"
+                                value={value}
+                                onChange={(e) => setValue(e.target.value)}
+                                className="transparent-input"
+                            />
+                        </Card>
+
+                        <Card>
+                            <label>Descrição</label>
+                            <input
+                                type="text"
+                                placeholder="Ex: Almoço com amigos"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                                className="transparent-input"
+                            />
+                        </Card>
+
+                        <Card>
+                            <label>Data</label>
+                            <input
+                                type="date"
+                                value={date}
+                                onChange={(e) => setDate(e.target.value)}
+                                className="transparent-input date-input"
+                            />
+                        </Card>
+
+                        <Card>
+                             <label>Categoria</label>
+                             <select 
+                                value={category} 
+                                onChange={(e) => setCategory(e.target.value)}
+                                className="transparent-input"
+                            >
+                                <option value="" disabled>Selecione uma categoria</option>
+                                <option value="alimentacao">Alimentação</option>
+                                <option value="transporte">Transporte</option>
+                                <option value="lazer">Lazer</option>
+                                <option value="moradia">Moradia</option>
+                                <option value="saude">Saúde</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </Card>
+                        
+                        <div className="submit-button-container">
+                            <Button type="submit" variant="primary">
+                                Adicionar
+                            </Button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <Card>
-                <form onSubmit={handleSubmit} className="expense-form">
-                    <div className="form-group">
-                        <label htmlFor="valor">Valor (R$)</label>
-                        <input
-                            type="number"
-                            id="valor"
-                            value={valor}
-                            onChange={(e) => setValor(e.target.value)}
-                            placeholder="100,50"
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="descricao">Descrição</label>
-                        <input
-                            type="text"
-                            id="descricao"
-                            value={descricao}
-                            onChange={(e) => setDescricao(e.target.value)}
-                            placeholder="Ex: Supermercado"
-                            required
-                        />
-                    </div>
-                     <div className="form-group">
-                        <label htmlFor="data">Data</label>
-                        <input
-                            type="date"
-                            id="data"
-                            value={data}
-                            onChange={(e) => setData(e.target.value)}
-                            required
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="categoria">Categoria</label>
-                        <select
-                            id="categoria"
-                            value={categoria}
-                            onChange={(e) => setCategoria(e.target.value)}
-                            required
-                        >
-                            <option value="" disabled>Selecione...</option>
-                            <option value="alimentacao">Alimentação</option>
-                            <option value="transporte">Transporte</option>
-                            <option value="moradia">Moradia</option>
-                            <option value="lazer">Lazer</option>
-                            <option value="outros">Outros</option>
-                        </select>
-                    </div>
-                    <Button type="submit">Adicionar</Button>
-                </form>
-            </Card>
         </MainLayout>
     );
 };
 
-export default AddExpensePage;
+export default AddExpense;

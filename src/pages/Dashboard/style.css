@@ -1,96 +1,128 @@
-.page-title h2 {
-  font-size: 2.5rem;
-  margin-bottom: 30px;
-  color: var(--dark-gray);
+/* src/pages/Dashboard/style.css */
+.back-button {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    background: black;
+    color: white;
+    border: none;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
 }
 
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
+.dashboard-container {
+    display: flex;
+    gap: 60px;
+    height: 100vh;
+    padding: 40px;
+    box-sizing: border-box;
 }
 
+/* === Metade Esquerda === */
+.dashboard-left {
+    width: 40%;
+    display: flex;
+    align-items: center;     /* Adicione esta linha para centralizar verticalmente */
+    justify-content: center; /* Adicione esta linha para centralizar horizontalmente */
+}
+
+.dashboard-title {
+    font-size: 94px;
+    font-weight: 700;
+    color: white;
+    text-align: center;      /* Altere para 'center' */
+    /* Remova as margens que o desalinhava */
+}
+
+/* === Metade Direita === */
+.dashboard-right {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end; /* Mantém o alinhamento dos cards (e do botão) à direita */
+    gap: 20px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.reports-button-container {
+    width: 50%; /* Faz o container do botão ter a mesma largura dos cards */
+    max-width: 550px; /* Garante que não ultrapasse a largura máxima dos cards */
+
+}
+
+
+/* === Estilos dos Cards (permanecem os mesmos) === */
 .card-title {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
+    color: var(--text-dark);
+    font-size: 18px;
+    font-weight: 600;
 }
 
 .card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
 }
 
-.card-header .card-title {
-  margin-bottom: 0; /* Remove a margem do título quando no header */
+.balance-card {
+    text-align: left;
 }
 
-/* Card Saldo */
-.saldo-valor {
-  font-size: 2.8rem;
-  font-weight: 700;
-  color: var(--dark-gray);
-  margin: 0;
+.balance-value {
+    color: var(--text-dark);
+    font-size: 36px;
+    font-weight: 700;
+    margin-top: 8px;
 }
 
-/* Lista genérica para os cards */
-.dashboard-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 100%;
-}
-
-.dashboard-list li {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 5px;
-  border-bottom: 1px solid #f0f0f0;
-  font-size: 0.95rem;
-}
-
-.dashboard-list li:last-child {
-  border-bottom: none;
-}
-
-.dashboard-list li span {
-  color: #555;
-}
-
-.dashboard-list li strong {
-  color: var(--dark-gray);
-  font-weight: 600;
-}
-
-/* Dropdown e Botão */
-.period-select {
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 5px 8px;
-  font-size: 0.9rem;
+.filter-select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
 }
 
 .add-button {
-  background-color: var(--dark-gray);
-  color: var(--white);
-  border: none;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  line-height: 1;
-  padding-bottom: 4px; /* Ajuste visual do '+' */
-  transition: background-color 0.2s;
+    background-color: black;
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.add-button:hover {
-  background-color: var(--primary-green);
+.list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: var(--text-dark);
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.list-item:last-child {
+    border-bottom: none;
+}
+
+.expense-value {
+    font-weight: 600;
 }
