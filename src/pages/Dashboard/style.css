@@ -126,3 +126,9 @@
 .expense-value {
     font-weight: 600;
 }
+
+.edit-button {
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}

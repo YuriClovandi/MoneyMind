@@ -45,7 +45,7 @@ const Dashboard = ({ balance }) => {
                             <div className="card-header">
                                 <h3 className="card-title">Saldo Atual</h3>
                                 <button onClick={() => navigate('/edit-balance')} className="edit-button">
-                                    ✎
+                                    Editar
                                 </button>
                             </div>
                             {/* 3. Saldo dinâmico e formatado */}
