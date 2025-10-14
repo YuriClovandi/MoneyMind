@@ -1,0 +1,48 @@
+/* src/pages/EditBalance/style.css */
+.back-button {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    background: black;
+    color: white;
+    border: none;
+    font-size: 24px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.edit-balance-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 40px;
+}
+
+.page-title {
+    font-size: 48px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.edit-balance-container .card {
+    width: 100%;
+    max-width: 450px;
+}
+
+.form-content .input-container {
+    text-align: left;
+}
+
+.save-button-container {
+    margin-top: 20px;
+}

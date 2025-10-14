@@ -21,7 +21,8 @@ const MOCK_EXPENSES = [
     { date: '09/10', category: 'Supermercado', value: 'R$ 230,00' },
 ];
 
-const Dashboard = () => {
+// 1. O componente agora aceita a prop 'balance'
+const Dashboard = ({ balance }) => {
     const navigate = useNavigate();
 
     return (
@@ -40,8 +41,17 @@ const Dashboard = () => {
                 <div className="dashboard-right">
                     <Card>
                         <div className="balance-card">
-                            <h3 className="card-title">Saldo Atual</h3>
-                            <p className="balance-value">R$ 2.540,75</p>
+                            {/* 2. Estrutura corrigida para alinhar o título e o botão */}
+                            <div className="card-header">
+                                <h3 className="card-title">Saldo Atual</h3>
+                                <button onClick={() => navigate('/edit-balance')} className="edit-button">
+                                    ✎
+                                </button>
+                            </div>
+                            {/* 3. Saldo dinâmico e formatado */}
+                            <p className="balance-value">
+                                {(balance || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}
+                            </p>
                         </div>
                     </Card>
 
@@ -81,7 +91,6 @@ const Dashboard = () => {
                         </ul>
                     </Card>
 
-                    {/* BOTÃO MOVIDO PARA CÁ */}
                     <div className="reports-button-container">
                         <Button variant="primary" onClick={() => navigate('/reports')}>
                             Relatórios
