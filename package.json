@@ -1,42 +1,33 @@
 {
-  "name": "moneymind-front",
-  "version": "0.1.0",
+  "name": "moneymind",
+  "version": "1.0.0",
+  "description": "MoneyMind - Sistema de controle financeiro pessoal",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.17.0",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^13.5.0",
-    "all": "^0.0.0",
-    "axios": "^1.5.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.15.0",
-    "react-scripts": "5.0.1",
-    "recharts": "^3.2.1",
-    "web-vitals": "^2.1.4"
-  },
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "concurrently \"npm run frontend:dev\" \"npm run backend:dev\"",
+    "frontend:dev": "cd frontend && npm start",
+    "backend:dev": "cd backend && npm run dev",
+    "frontend:build": "cd frontend && npm run build",
+    "backend:build": "cd backend && npm run build",
+    "backend:start": "cd backend && npm start",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
+    "build:all": "npm run backend:build && npm run frontend:build"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "keywords": [
+    "react",
+    "typescript",
+    "express",
+    "supabase",
+    "finance",
+    "money-management"
+  ],
+  "author": "",
+  "license": "MIT"
 }

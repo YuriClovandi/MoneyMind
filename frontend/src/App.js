@@ -5,7 +5,7 @@ import './assets/styles/global.css';
 
 function App() {
   // 2. Criar o estado do saldo aqui, no componente principal
-  const [balance, setBalance] = useState(2540.75); // Valor inicial
+  const [balance, setBalance] = useState(0); // Valor inicial zerado
 
   return (
     // 3. Passar o saldo (balance) e a função para atualizá-lo (setBalance) para as rotas
