@@ -35,21 +35,26 @@ app.use(helmet({
 }));
 
 app.use(cors({
-  origin: function (origin, callback) {
+  origin: function (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) {
     // Permitir requisições sem origin (Postman, mobile apps, etc)
-    if (!origin) return callback(null, true);
-    
-    // Permitir se estiver na lista ou em produção sem origin específico
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+    if (!origin) {
       callback(null, true);
-    } else {
-      // Em produção, aceitar qualquer origin do domínio configurado
-      if (isProduction && origin.includes('moneymind1.me')) {
-        callback(null, true);
-      } else {
-        callback(new Error('Não permitido pelo CORS'));
-      }
+      return;
     }
+    
+    // Permitir se estiver na lista
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+      return;
+    }
+    
+    // Em produção, aceitar qualquer origin do domínio configurado
+    if (isProduction && origin.includes('moneymind1.me')) {
+      callback(null, true);
+      return;
+    }
+    
+    callback(new Error('Não permitido pelo CORS'));
   },
   credentials: true
 }));
@@ -83,7 +88,8 @@ if (isProduction) {
     app.get('*', (req, res) => {
       // Não servir index.html para rotas da API
       if (req.path.startsWith('/api')) {
-        return res.status(404).json({ message: 'Rota não encontrada' });
+        res.status(404).json({ message: 'Rota não encontrada' });
+        return;
       }
       res.sendFile(join(frontendBuildPath, 'index.html'));
     });
