@@ -1,0 +1,53 @@
+{
+  "name": "MoneyMind",
+  "description": "Sistema de controle financeiro pessoal",
+  "repository": "https://github.com/seu-usuario/moneymind",
+  "logo": "https://moneymind1.me/favicon.ico",
+  "keywords": ["react", "nodejs", "express", "typescript", "supabase", "finance"],
+  "image": "heroku/nodejs",
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "env": {
+    "NODE_ENV": {
+      "required": true,
+      "value": "production"
+    },
+    "SUPABASE_URL": {
+      "required": true,
+      "description": "URL do seu projeto Supabase"
+    },
+    "SUPABASE_ANON_KEY": {
+      "required": true,
+      "description": "Chave anon do Supabase"
+    },
+    "SUPABASE_SERVICE_ROLE_KEY": {
+      "required": true,
+      "description": "Chave service role do Supabase"
+    },
+    "JWT_SECRET": {
+      "required": true,
+      "description": "Chave secreta para JWT (gerar uma chave forte)"
+    },
+    "FRONTEND_URL": {
+      "required": false,
+      "value": "https://moneymind1.me",
+      "description": "URL do frontend"
+    },
+    "REACT_APP_API_URL": {
+      "required": false,
+      "value": "https://moneymind1.me/api",
+      "description": "URL da API para o frontend"
+    }
+  },
+  "addons": []
+}
+

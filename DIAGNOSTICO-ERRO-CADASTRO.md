@@ -88,3 +88,4 @@ CREATE POLICY "Users can insert their own data" ON users
 ---
 
 **Agora tente criar uma conta novamente e me diga qual erro específico aparece!** 🎯
+

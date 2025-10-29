@@ -28,3 +28,4 @@ SELECT COUNT(*) as total_despesas
 FROM expenses e 
 JOIN users u ON e.user_id = u.id 
 WHERE u.email = 'teste@exemplo.com';
+

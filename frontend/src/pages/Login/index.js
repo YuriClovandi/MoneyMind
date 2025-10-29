@@ -41,8 +41,26 @@ const Login = () => {
         } catch (error) {
             console.error('Erro no login:', error);
             
-            if (error.response?.status === 401) {
+            if (error.response?.data) {
+                const errorData = error.response.data;
+                let errorMessage = errorData.message || 'Erro desconhecido';
+                
+                // Mostrar mensagem mais específica
+                if (error.response.status === 401) {
+                    errorMessage = errorData.message || 'Email ou senha incorretos!';
+                } else if (error.response.status === 403) {
+                    errorMessage = errorData.message || 'Por favor, confirme seu email antes de fazer login.';
+                } else if (errorData.error) {
+                    if (typeof errorData.error === 'string') {
+                        errorMessage += ': ' + errorData.error;
+                    }
+                }
+                
+                alert(errorMessage);
+            } else if (error.response?.status === 401) {
                 alert('Email ou senha incorretos!');
+            } else if (error.code === 'NETWORK_ERROR' || !error.response) {
+                alert('Erro: Não foi possível conectar ao servidor. Verifique se o backend está rodando.');
             } else {
                 alert('Erro ao fazer login. Verifique sua conexão e tente novamente.');
             }

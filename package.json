@@ -15,7 +15,11 @@
     "backend:build": "cd backend && npm run build",
     "backend:start": "cd backend && npm start",
     "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
-    "build:all": "npm run backend:build && npm run frontend:build"
+    "build:all": "npm run backend:build && npm run frontend:build",
+    "build": "npm run build:all",
+    "start:production": "cd backend && node dist/index.js",
+    "start": "npm run start:production",
+    "heroku-postbuild": "npm install && cd frontend && npm install && cd ../backend && npm install && cd ../backend && npm run build && cd ../frontend && npm run build"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

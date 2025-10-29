@@ -144,15 +144,55 @@ npm run install:all        # Instala dependências de ambos os projetos
 - `PUT /api/expenses/:id` - Atualizar despesa (requer auth)
 - `DELETE /api/expenses/:id` - Deletar despesa (requer auth)
 
-## 🚀 Deploy
+## 🚀 Deploy no Heroku
 
-### Heroku (Backend)
-1. Configure as variáveis de ambiente no Heroku
-2. Deploy do backend: `npm run backend:build && npm run backend:start`
+O MoneyMind está configurado para deploy completo (frontend + backend) no Heroku com domínio customizado.
 
-### Vercel/Netlify (Frontend)
-1. Configure `REACT_APP_API_URL` para sua URL do Heroku
-2. Deploy: `npm run frontend:build`
+### 📚 Guias de Deploy
+
+- **⚡ Guia Rápido**: Veja `DEPLOY-QUICK-START.md`
+- **📖 Guia Completo**: Veja `DEPLOY-HEROKU.md`
+- **🤖 Script Automatizado**: Use `SETUP-HEROKU.sh` (Linux/Mac)
+
+### 🚀 Passos Rápidos
+
+1. **Login e criar app:**
+   ```bash
+   heroku login
+   heroku create moneymind
+   ```
+
+2. **Configurar variáveis:**
+   ```bash
+   heroku config:set NODE_ENV=production
+   heroku config:set SUPABASE_URL=...
+   heroku config:set REACT_APP_API_URL=https://moneymind1.me/api
+   # ... (veja DEPLOY-QUICK-START.md para lista completa)
+   ```
+
+3. **Adicionar domínio:**
+   ```bash
+   heroku domains:add moneymind1.me
+   ```
+
+4. **Configurar DNS no Namecheap:**
+   - CNAME @ → `moneymind.herokuapp.com`
+   - CNAME www → `moneymind.herokuapp.com`
+
+5. **Deploy:**
+   ```bash
+   git push heroku main
+   ```
+
+### 🌐 Domínio Customizado
+
+O projeto está configurado para:
+- ✅ Servir frontend e backend do mesmo domínio
+- ✅ HTTPS automático (SSL Let's Encrypt)
+- ✅ CORS configurado para `moneymind1.me`
+- ✅ React Router funcionando em produção
+
+**Acesse:** https://moneymind1.me
 
 ## 🛠️ Tecnologias
 

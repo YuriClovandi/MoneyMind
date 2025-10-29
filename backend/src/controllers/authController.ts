@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
-import { supabase } from '../services/supabase';
+import { supabase, supabaseAdmin } from '../services/supabase';
 import { generateToken } from '../utils/jwt';
 import { RegisterRequest, AuthRequest, ApiResponse } from '../types';
 
@@ -151,32 +151,133 @@ export const authController = {
 
       const { email, password }: AuthRequest = req.body;
 
+      console.log('🔐 Tentando fazer login:', { email });
+
       // Autenticar com Supabase Auth
       const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
         email,
         password
       });
 
-      if (authError || !authData.user) {
+      if (authError) {
+        console.error('❌ Erro no Supabase Auth:', {
+          message: authError.message,
+          status: authError.status,
+          name: authError.name
+        });
+
+        // Tratar erros específicos do Supabase
+        if (authError.message.includes('Invalid login credentials')) {
+          return res.status(401).json({
+            success: false,
+            message: 'Email ou senha incorretos',
+            error: authError.message
+          } as ApiResponse);
+        }
+
+        if (authError.message.includes('Email not confirmed')) {
+          return res.status(403).json({
+            success: false,
+            message: 'Por favor, confirme seu email antes de fazer login',
+            error: authError.message
+          } as ApiResponse);
+        }
+
         return res.status(401).json({
           success: false,
-          message: 'Email ou senha inválidos'
+          message: 'Erro ao autenticar: ' + authError.message,
+          error: authError.message
         } as ApiResponse);
       }
 
-      // Buscar dados do usuário
+      if (!authData.user) {
+        console.error('❌ Usuário não retornado do Supabase Auth');
+        return res.status(401).json({
+          success: false,
+          message: 'Erro ao autenticar: usuário não encontrado'
+        } as ApiResponse);
+      }
+
+      console.log('✅ Autenticação no Supabase Auth bem-sucedida:', {
+        userId: authData.user.id,
+        email: authData.user.email,
+        emailConfirmed: authData.user.email_confirmed_at ? 'Sim' : 'Não'
+      });
+
+      // Buscar dados do usuário na tabela users
       const { data: userData, error: userError } = await supabase
         .from('users')
         .select('id, email, name, balance')
         .eq('id', authData.user.id)
         .single();
 
-      if (userError || !userData) {
-        return res.status(401).json({
+      if (userError) {
+        console.error('❌ Erro ao buscar usuário na tabela users:', {
+          error: userError.message,
+          code: userError.code,
+          userId: authData.user.id
+        });
+
+        // Se o usuário não existe na tabela users mas existe no auth.users,
+        // criar automaticamente o registro (sync)
+        if (userError.code === 'PGRST116') {
+          console.log('⚠️ Usuário existe no Auth mas não na tabela users. Criando registro...');
+          
+          // Usar supabaseAdmin para bypass de RLS ao criar o registro
+          const { data: newUserData, error: createError } = await supabaseAdmin
+            .from('users')
+            .insert({
+              id: authData.user.id,
+              email: authData.user.email || email,
+              name: authData.user.user_metadata?.name || 'Usuário',
+              balance: 0
+            })
+            .select('id, email, name, balance')
+            .single();
+
+          if (createError || !newUserData) {
+            console.error('❌ Erro ao criar registro do usuário:', createError);
+            return res.status(500).json({
+              success: false,
+              message: 'Erro ao sincronizar perfil do usuário',
+              error: createError?.message
+            } as ApiResponse);
+          }
+
+          console.log('✅ Registro criado com sucesso:', newUserData);
+
+          // Gerar token JWT
+          const token = generateToken({
+            userId: newUserData.id,
+            email: newUserData.email
+          });
+
+          return res.json({
+            success: true,
+            data: {
+              user: newUserData,
+              token
+            },
+            message: 'Login realizado com sucesso (perfil sincronizado)'
+          } as ApiResponse);
+        }
+
+        return res.status(500).json({
           success: false,
-          message: 'Usuário não encontrado'
+          message: 'Erro ao buscar dados do usuário',
+          error: userError.message
         } as ApiResponse);
       }
+
+      if (!userData) {
+        console.error('❌ Usuário não encontrado na tabela users');
+        return res.status(401).json({
+          success: false,
+          message: 'Usuário não encontrado no sistema'
+        } as ApiResponse);
+      }
+
+      console.log('✅ Usuário encontrado:', { userId: userData.id, email: userData.email });
 
       // Gerar token JWT
       const token = generateToken({
@@ -194,10 +295,11 @@ export const authController = {
       } as ApiResponse);
 
     } catch (error) {
-      console.error('Erro no login:', error);
+      console.error('❌ Erro no login:', error);
       res.status(500).json({
         success: false,
-        message: 'Erro interno do servidor'
+        message: 'Erro interno do servidor',
+        error: process.env.NODE_ENV === 'development' ? (error as Error).message : undefined
       } as ApiResponse);
     }
   }

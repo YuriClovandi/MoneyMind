@@ -78,3 +78,4 @@ npm run dev
 - [ ] Backend rodando sem erros de variáveis de ambiente
 - [ ] Frontend conectando com backend (verificar console do navegador)
 - [ ] Usuário criado no Supabase (se necessário para autenticação)
+
